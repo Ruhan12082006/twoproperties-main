@@ -4,6 +4,6 @@
     ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "c:\\legoapps\\twoproperties\\lib\\ev3classes.jar"
+        "lib\\ev3classes.jar"
     ]
 }
