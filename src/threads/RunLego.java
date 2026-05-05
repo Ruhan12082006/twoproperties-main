@@ -1,7 +1,10 @@
 package threads;
-import data.*;
+
+import data.Robot;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.hardware.lcd.LCD;
+import lejos.utility.Delay;
 
 public class RunLego implements Runnable {
     UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
@@ -15,9 +18,27 @@ public class RunLego implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             if (Robot.getRun() == 1) {
-                motorA.setPower(Robot.turnRight());
-                motorB.setPower(Robot.turnLeft());
+                if (Robot.isObstacleDetected()) {
+                    // Stop
+                    motorA.setPower(0);
+                    motorB.setPower(0);
+                    LCD.drawString("Obstacle!  ", 0, 0);
+                    Delay.msDelay(500);
+
+                    // Turn around 180 degrees
+                    motorA.setPower(150);
+                    motorB.setPower(-150);
+                    Delay.msDelay(1000);
+
+                    motorA.setPower(0);
+                    motorB.setPower(0);
+
+                } else {
+                    motorA.setPower(Robot.turnRight());
+                    motorB.setPower(Robot.turnLeft());
+                }
             } else {
                 motorA.setPower(0);
                 motorB.setPower(0);
