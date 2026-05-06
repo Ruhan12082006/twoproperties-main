@@ -21,6 +21,7 @@ public class RunLego implements Runnable {
 
             if (Robot.getRun() == 1) {
                 if (Robot.isObstacleDetected()) {
+                   
                     // Stop
                     motorA.setPower(0);
                     motorB.setPower(0);
