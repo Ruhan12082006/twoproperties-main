@@ -28,8 +28,8 @@ public class RunLego implements Runnable {
                     Delay.msDelay(500);
 
                     // Turn around 180 degrees
-                    motorA.setPower(150);
-                    motorB.setPower(-150);
+                    motorA.setPower(75);
+                    motorB.setPower(-75);
                     Delay.msDelay(1000);
 
                     motorA.setPower(0);
