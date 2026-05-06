@@ -3,6 +3,7 @@ package threads;
 import data.Robot;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 
@@ -12,7 +13,7 @@ public class RunLego implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Button.ESCAPE.isDown()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

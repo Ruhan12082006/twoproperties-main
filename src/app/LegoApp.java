@@ -1,4 +1,5 @@
 package app;
+import lejos.hardware.Button;
 import threads.*;
 
 public class LegoApp {
@@ -16,5 +17,7 @@ public class LegoApp {
         ultrasonicThread.start();
         runLegoThread.start();
         readDataThread.start();
+
+        Button.ESCAPE.waitForPress();
     }
 }

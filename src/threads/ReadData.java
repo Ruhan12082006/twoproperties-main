@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import data.*;
+import lejos.hardware.Button;
 
 public class ReadData implements Runnable {
     URL url = null;
@@ -16,7 +17,7 @@ public class ReadData implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Button.ESCAPE.isDown()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
