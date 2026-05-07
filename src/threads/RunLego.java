@@ -6,6 +6,8 @@ import lejos.hardware.port.MotorPort;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class RunLego implements Runnable {
     UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
@@ -22,11 +24,12 @@ public class RunLego implements Runnable {
 
             if (Robot.getRun() == 1) {
                 if (Robot.isObstacleDetected()) {
-                   
+                    Robot.incrementObstacleCount();
+                    sendObstacleCount();
                     // Stop
                     motorA.setPower(0);
                     motorB.setPower(0);
-                    LCD.drawString("Obstacle!  ", 0, 0);
+                    LCD.drawString("Obstacle! " + Robot.getObstacleCount(), 0, 0);
                     Delay.msDelay(500);
 
                     // Turn around 180 degrees
@@ -45,6 +48,18 @@ public class RunLego implements Runnable {
                 motorA.setPower(0);
                 motorB.setPower(0);
             }
+        }
+    }
+
+    private void sendObstacleCount() {
+        try {
+            URL url = new URL("http://172.31.161.60:8080/legorest2/rest/lego/obstacledetected");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

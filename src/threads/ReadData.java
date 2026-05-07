@@ -24,7 +24,7 @@ public class ReadData implements Runnable {
                 e.printStackTrace();
             }
             try {
-                url = new URL("http://172.31.160.87:8080/legorest2/rest/lego/getvalues");
+                url = new URL("http://172.31.161.60:8080/legorest2/rest/lego/getvalues");
                 conn = (HttpURLConnection) url.openConnection();
                 InputStream is = null;
                 try {
@@ -41,6 +41,7 @@ public class ReadData implements Runnable {
                     Robot.setRun(values[1]);
                     Robot.setSpeed(values[2]);
                     Robot.setTurn(values[3]);
+                    Robot.setObstacleCount(Integer.parseInt(values[4]));
                 }
                 br.close();
                 isr.close();
